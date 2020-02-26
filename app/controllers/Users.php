@@ -117,4 +117,8 @@ class Users extends Controller
     session_destroy();
     redirect();
   }
+
+  public function register(){
+    $this->view('users/register');
+  }
 }
