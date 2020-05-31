@@ -61,7 +61,7 @@ class Posts extends Controller
       $this->view('posts/add');
     }
   }
-//edit post
+//edit post -----------------------------------------------
   public function edit($id){
     $post = $this->postModel->getPostById($id);
     if($post->user_id != $_SESSION['user_id']){
@@ -73,5 +73,22 @@ class Posts extends Controller
       'content' => $post->content
     );
     $this->view("posts/edit", $data);
+  }
+  //delete post -------------------------------------------
+  public function delete($id){
+    if($_SERVER['REQUEST_METHOD'] == 'POST'){
+      $post = $this->postModel->getPostById($id);
+      if($post->user_id != $_SESSION['user_id']){
+        redirect('posts');
+      }
+
+      if($this->postModel->deletePost($id)){
+        redirect('posts');
+      } else {
+        die('Something went wrong');
+      }
+    } else {
+      redirect('posts');
+    }
   }
 }
