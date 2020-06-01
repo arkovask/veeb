@@ -6,6 +6,7 @@ class Posts extends Controller
   public function __construct(){
     $this->postModel = $this->model('Post');
     $this->userModel = $this->model('User');
+    $this->tagModel = $this->model('Tag');
   }
   public function index(){
     if($this->postModel->getAllPosts() !== false){
@@ -17,9 +18,11 @@ class Posts extends Controller
   public function show($id){
     $post = $this->postModel->getPostById($id);
     $user = $this->userModel->getUserById($post->user_id);
+    $tag = $this->tagModel->getTagById($post->id);
     $data = array(
       'post' => $post,
-      'user' => $user
+      'user' => $user,
+      'tags' => $tag
     );
     $this->view('posts/show', $data);
   }

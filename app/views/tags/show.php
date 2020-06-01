@@ -11,7 +11,9 @@
     <?php foreach ($data['posts'] as $post):?>
       <div class="car card-body mb-3">
         <h4 class="card-title"><?php echo $post->postTitle;?></h4>
-        <div class="bg-light p-2 mb-3">Written by <?php echo $post->userName;?> on <?php echo $post->postCreated;?></div>
+        <h1 class="bg-light p-2 mb-3">Written by <?php echo $post->userName;?> on <?php echo $post->postCreated;?>
+          <h1>TAG
+        </div>
         <div class="card-text mb-3"><?php echo substr($post->postContent, 0, 300);?>...</div>
         <a href="<?php echo URLROOT?>/posts/show/<?php echo $post->postId;?>" class="btn btn-info">Read More</a>
       </div>

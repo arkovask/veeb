@@ -41,4 +41,21 @@ class Tag
       return false;
     }
   }
+  public function getTagById($id) {
+    $this->db->query('SELECT tag_id, name AS tag_name 
+                      FROM post_tags
+                      INNER JOIN posts
+                      ON posts.id=post_tags.post_id
+                      INNER JOIN tags
+                      ON tags.id=post_tags.tag_id
+                      WHERE post_id=:id'
+    );
+    $this->db->bind(':id', $id);
+    $tagGroup = $this->db->getAll();
+    if ($this->db->rowCount() > 0) {
+      return $tagGroup;
+    } else {
+      return false;
+    }
+  }
 }
